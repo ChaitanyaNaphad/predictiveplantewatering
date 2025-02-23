@@ -7,9 +7,8 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 
 # Load dataset
-# dataset_url = ("https://raw.githubusercontent.com/ChaitanyaNaphad/chaitu_global/refs/heads/main/watering_schedule_combinations.csv")
-# df = pd.read_csv(dataset_url)
-df =pd.read_csv("E:\\all_csv\\watering_schedule_combinations.csv")
+dataset_url = ("https://raw.githubusercontent.com/ChaitanyaNaphad/predictiveplantewatering/refs/heads/main/watering_schedule_combinations.csv"  )
+df = pd.read_csv(dataset_url)
 # Streamlit UI with dark theme
 st.set_page_config(page_title="Plant Watering Predictor", layout="centered")
 st.markdown("""
