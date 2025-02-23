@@ -1,14 +1,14 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 
 # Load dataset
-dataset_url = ("https://raw.githubusercontent.com/ChaitanyaNaphad/predictiveplantewatering/refs/heads/main/watering_schedule_combinations.csv"  )
+dataset_url = "https://raw.githubusercontent.com/ChaitanyaNaphad/predictiveplantewatering/refs/heads/main/watering_schedule_combinations.csv"
 df = pd.read_csv(dataset_url)
+
 # Streamlit UI with dark theme
 st.set_page_config(page_title="Plant Watering Predictor", layout="centered")
 st.markdown("""
@@ -17,11 +17,11 @@ st.markdown("""
         background-color: black;
         color: white;
     }
-    .stSlider {
-        color: white;
-    }
     </style>
 """, unsafe_allow_html=True)
+
+# Display a warning for mobile users
+st.warning("📱 If you are not in desktop site mode, please switch to it.")
 
 st.title("🌿 Plant Watering Predictor")
 st.write("Enter environmental conditions to get watering recommendations.")
@@ -51,24 +51,24 @@ selected_plant = st.selectbox("Select a plant:", list(plant_options.keys()))
 def predict_watering(plant_name):
     X = df[["Soil Moisture (%)", "Temperature (°C)", "Humidity (%)"]]
     y = df[plant_name]
-    
+
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    
+
     poly = PolynomialFeatures(degree=2)
     X_poly_train = poly.fit_transform(X_train)
     X_poly_test = poly.transform(X_test)
     poly_reg = LinearRegression()
     poly_reg.fit(X_poly_train, y_train)
-    
+
     user_input_poly = poly.transform(user_input)
     predicted_days = poly_reg.predict(user_input_poly)
-    
+
     return predicted_days[0]
 
 if st.button("Predict Watering Days"):
     watering_days = predict_watering(plant_options[selected_plant])
     st.success(f"⏳ Recommended Watering in: {watering_days:.2f} days")
-    
+
 # Footer
 st.markdown("---")
 st.markdown("Created by [Chaitanya Naphad] 🌱")
