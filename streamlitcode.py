@@ -15,8 +15,11 @@ st.title("🌱 Predictive Plant Watering App")
 
 import pandas as pd
 
-dataset_url = ("https://raw.githubusercontent.com/ChaitanyaNaphad/chaitu_global/refs/heads/main/watering_schedule_combinations.csv"  )
+# dataset_url = ("https://raw.githubusercontent.com/ChaitanyaNaphad/chaitu_global/refs/heads/main/watering_schedule_combinations.csv"  )
+dataset_url = "https://raw.githubusercontent.com/ChaitanyaNaphad/predictiveplantewatering/main/watering_schedule_combinations.csv"
+
 df = pd.read_csv(dataset_url)
+
 
 # File uploader for optional dataset upload
 uploaded_file = st.file_uploader("Upload your dataset (CSV format)", type=["csv"])
