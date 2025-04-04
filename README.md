@@ -1,4 +1,4 @@
-*🌱 Indoor Planter Smart Watering Predictor
+🌱 Indoor Planter Smart Watering Predictor
 
 🚀 Overview
 
