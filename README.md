@@ -25,8 +25,11 @@ ESP8266 | Firebase | Machine Learning | Streamlit
 📜 Installation
 
 git clone https://github.com/ChaitanyaNaphad/predictiveplantewatering.git
+
 cd predictiveplantewatering
+
 pip install -r requirements.txt
+
 streamlit run streamlit_app/app.py
 
 🔍 How It Works
