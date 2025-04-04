@@ -16,7 +16,7 @@ ML Model (Polynomial Features) predicts watering needs.
 
 🌍 Live Demo
 
-🔗 Access Here
+👉 https://plantproject.streamlit.app/
 
 🛠️ Tech Stack
 
