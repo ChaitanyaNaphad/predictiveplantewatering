@@ -56,11 +56,43 @@ if df is not None:
     temperature = st.number_input("Enter Temperature (°C)", min_value=-10.0, max_value=50.0)
     humidity = st.number_input("Enter Humidity (%)", min_value=0.0, max_value=100.0)
 
-    if st.button("Predict Watering Time"):
-        y = df[selected_plant]  # Get the correct target variable
+    # Prediction function
+    def predict_watering(plant_name):
+        X = df[["Soil Moisture (%)", "Temperature (°C)", "Humidity (%)"]]
+        y = df[plant_name]
+
+        X_poly = poly.fit_transform(X)
+        model.fit(X_poly, y)
 
         user_input = np.array([[soil_moisture, temperature, humidity]])
         user_input_poly = poly.transform(user_input)
 
         predicted_days = model.predict(user_input_poly)
-        st.success(f"⏳ Recommended Watering in: {predicted_days[0]:.2f} days")
+        return predicted_days[0]
+
+    # Prediction button
+    if st.button("Predict Watering Days"):
+        output = ""
+
+        # Check soil moisture condition and display appropriate warning
+        if soil_moisture < 30:
+            output += "⚠️ Soil moisture is below 30%. Please water your plant immediately!\n\n"
+        elif soil_moisture > 60:
+            output += "⚠️ Soil is over moist. Watering is not necessary at the moment.\n\n"
+
+        # Only calculate and display watering days if moisture >= 30
+        if soil_moisture >= 30:
+            watering_days = predict_watering(selected_plant)
+
+            # Convert decimal days into days and hours
+            days = int(watering_days)
+            hours = int((watering_days - days) * 24)
+
+            output += f"⏳ Recommended Watering in: {days} days and {hours} hours"
+
+        # Display the output below the button
+        st.text_area("", output, height=200)
+
+    # Footer
+    st.markdown("---")
+    st.markdown("Created by [Chaitanya Naphad] 🌱")
