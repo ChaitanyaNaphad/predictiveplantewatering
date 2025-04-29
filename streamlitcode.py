@@ -53,7 +53,7 @@ if df is not None:
 
     # User inputs
     soil_moisture = st.number_input("Enter Soil Moisture (%)", min_value=0.0, max_value=100.0)
-    temperature = st.number_input("Enter Temperature (°C)", min_value=-10.0, max_value=50.0)
+    temperature = st.number_input("Enter Temperature (°C)", min_value=0.0, max_value=50.0)
     humidity = st.number_input("Enter Humidity (%)", min_value=0.0, max_value=100.0)
 
     # Prediction function
@@ -95,4 +95,4 @@ if df is not None:
 
     # Footer
     st.markdown("---")
-    st.markdown("Created by [Chaitanya Naphad] 🌱")
+    st.markdown("Created by Chaitanya Naphad 🌱")
